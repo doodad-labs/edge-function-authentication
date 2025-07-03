@@ -1,0 +1,16 @@
+{
+  "compatibility_date": "2025-04-01",
+  "main": "src/index.ts",
+  "name": "edge-function-authentication",
+  "upload_source_maps": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "6f711f33-0911-411c-866d-48f392a05010",
+      "database_name": "edge-function-authentication"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
