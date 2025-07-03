@@ -19,15 +19,25 @@
     "publish": true
   },
   "devDependencies": {
+    "@types/node": "^24.0.10",
+    "prisma": "^6.11.1",
     "typescript": "5.8.3",
-    "wrangler": "4.21.x"
+    "wrangler": "4.23.0"
   },
   "scripts": {
     "cf-typegen": "wrangler types",
     "check": "tsc && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
-    "dev": "pnpm seedLocalD1 && wrangler dev",
-    "predeploy": "wrangler d1 migrations apply DB --remote",
-    "seedLocalD1": "wrangler d1 migrations apply DB --local"
+    "dev": "wrangler dev",
+    "migration:new": "npx wrangler d1 migrations create edge-function-authentication",
+    "migration:diff": "npx prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script --output",
+    "migration:deploy": "npx wrangler d1 migrations apply edge-function-authentication --remote",
+    "migration:deploy:local": "npx wrangler d1 migrations apply edge-function-authentication --remote"
+  },
+  "dependencies": {
+    "@prisma/adapter-d1": "^6.11.1",
+    "@prisma/client": "^6.11.1",
+    "argon2": "^0.43.0",
+    "itty-router": "^5.0.18"
   }
 }

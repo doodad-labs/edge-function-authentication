@@ -1,14 +1,10 @@
-import { renderHtml } from "./renderHtml";
+import { AutoRouter } from 'itty-router'
+import { withDatabase } from './helper'
+import index from './routes/index'
 
-export default {
-  async fetch(request, env) {
-    const stmt = env.DB.prepare("SELECT * FROM comments LIMIT 3");
-    const { results } = await stmt.all();
+export const router = AutoRouter()
 
-    return new Response(renderHtml(JSON.stringify(results, null, 2)), {
-      headers: {
-        "content-type": "text/html",
-      },
-    });
-  },
-} satisfies ExportedHandler<Env>;
+router
+  .get('/', withDatabase, index)
+
+export default router
