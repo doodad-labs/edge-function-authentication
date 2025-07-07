@@ -32,10 +32,29 @@ model User {
 model Service {
   id        String   @id @default(cuid())
 
+  name      String
+  callback  String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user      User[]
+  users      User[]
+  serviceUsers ServiceUser[]
 
   @@map("services")
+}
+
+model ServiceUser {
+  id        String   @id @default(cuid())
+
+  sid       String
+  service   Service? @relation(fields: [sid], references: [id], onDelete: Cascade)
+
+  email     String @unique
+  password  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("service_users")
 }
